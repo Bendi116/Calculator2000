@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(31, 20, 9);
+}
+
+.calculator{
+    /* color: blanchedalmond; */
+    color:ghostwhite;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 860px;
+    padding: 10px;
+    border: 1px solid red;
+    margin: auto auto;
+    margin-top: 100px;
+    background-color: rgb(40, 39, 33);
+}
+
+.display{
+}
+
+.keys-container{
+    display: flex;
+}
+
+.number-keys-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.num-col{
+    display: flex;
+}
+
+.operator-keys-container{
+    display: flex;
+    flex-direction: column;
+}
