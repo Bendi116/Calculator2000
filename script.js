@@ -27,4 +27,4 @@ function operate(firstOperand, secondOperand, operator){
             break    
     }
     return result;
-}
+}   
