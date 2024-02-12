@@ -77,7 +77,7 @@ button{
     background-color: rgb(51, 48, 48);
 }
 
-.on-key, .off-key, .clear-key, .equal-key{
+.onoff-key, .point-key, .clear-key, .equal-key{
     height: 100px;
     width: 120px;
 
