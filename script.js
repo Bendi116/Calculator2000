@@ -2,7 +2,7 @@
 function add(a,b){return a + b}
 function subtract(a,b){return a - b}
 function multiple(a,b){return a * b}
-function divide(a,b){return a / b}
+function divide(a,b){return b !== 0 ?  a / b : "Error"}
 
 //variables
 let firstOperand = ""
@@ -55,7 +55,7 @@ function operate(firstOperand, secondOperand, operator){
             result = divide(firstOperand, secondOperand)
             break;
     }
-    return result;
+    return Math.round(result * 100000) / 100000;
 }   
 //on off function
 function onOff(){
@@ -72,19 +72,24 @@ function onOff(){
 //calculate function
 
 function calculate(){
-    let result = operate(firstOperand,secondOperand,operator)
-    displayClear()
-    displayNum(result)
-    setUpMemory()
-    firstOperand = result;
-    calculated = true;
+    if(on){
+        let result = operate(firstOperand,secondOperand,operator)
+        displayClear()
+        displayNum(result)
+        setUpMemory()
+        firstOperand = result;
+        calculated = true;}
+    
 }
 //clear function
 
 function clear(){
-    displayClear()
-    setUpMemory()
-    displayNum("0")
+    if(on){
+        displayClear()
+        setUpMemory()
+        displayNum("0")
+    }
+
 }
 
 //memory srote function
@@ -108,7 +113,7 @@ function numStoreInMemory(e){
 }
 
 function operatorStoreInMemory(e){
-    if(on){
+    if(on&& firstOperand !=="Error"){
         if(operator){
             calculate()
         }
@@ -122,19 +127,20 @@ function operatorStoreInMemory(e){
 }
 
 function addPoint(){
-    console.log("Hello")
-    if(secondOperand === "" && firstOperand === "" ){
-        firstOperand+="0."
-        displayNum(".")
+    if(on){
+        if(secondOperand === "" && firstOperand === "" ){
+            firstOperand+="0."
+            displayNum(".")
+        }
+        else if(secondOperand === "" && firstOperand.indexOf(".") === -1){
+            firstOperand += "."
+            displayNum(".")
+        }else if(secondOperand.indexOf(".") === -1 && secondOperand !==""){
+            secondOperand += "."
+            displayNum(".")
+        }
     }
-    else if(secondOperand === "" && firstOperand.indexOf(".") === -1){
-        firstOperand += "."
-        displayNum(".")
-    }else if(secondOperand.indexOf(".") === -1 && secondOperand !==""){
-        console.log(". added")
-        secondOperand += "."
-        displayNum(".")
-    }
+    
 }
 
 function setUpMemory(){
