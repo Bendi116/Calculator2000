@@ -1,26 +1,27 @@
 //bacis operators
-function add(a,b){return a + b}
-function subtract(a,b){return a - b}
-function multiple(a,b){return a * b}
-function divide(a,b){return b !== 0 ?  a / b : "Error"}
+function add(a,b){return a + b};
+function subtract(a,b){return a - b};
+function multiple(a,b){return a * b};
+function divide(a,b){return b !== 0 ?  a / b : "Error"};
 
 //variables
-let firstOperand = ""
-let secondOperand = ""
-let operator = ""
+let firstOperand = "";
+let secondOperand = "";
+let operator = "";
 
 let hasOp = false;
 let calculated = false;
 let on = true;
 
 ///const html element 
-const displayText = document.querySelector(".display-text")
-const numKeys = document.querySelectorAll(".num")
-const opKeys = document.querySelectorAll(".operator-key")
-const equalKey = document.querySelector(".equal-key")
-const clearKey = document.querySelector(".clear-key")
-const onOffKey = document.querySelector(".onoff-key")
-const pointKey = document.querySelector(".point-key")
+const displayText = document.querySelector(".display-text");
+const numKeys = document.querySelectorAll(".num");
+const opKeys = document.querySelectorAll(".operator-key");
+const equalKey = document.querySelector(".equal-key");
+const clearKey = document.querySelector(".clear-key");
+const onOffKey = document.querySelector(".onoff-key");
+const pointKey = document.querySelector(".point-key");
+const backSpaceKey = document.querySelector(".backspace-key");
 
 
 
@@ -35,6 +36,7 @@ equalKey.addEventListener("click", calculate)
 clearKey.addEventListener("click",clear)
 onOffKey.addEventListener("click",onOff)
 pointKey.addEventListener("click",addPoint)
+backSpaceKey.addEventListener("click",backSpace)
 
 //operate func
 function operate(firstOperand, secondOperand, operator){
@@ -90,6 +92,11 @@ function clear(){
         displayNum("0")
     }
 
+}
+//backspace
+function backSpace(){
+    if (on && !calculated)
+    displayText.innerText = displayText.innerText.slice(0, -1)
 }
 
 //memory srote function
