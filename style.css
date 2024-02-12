@@ -10,7 +10,7 @@
     gap: 20px;
 
     width: 620px;
-    height: 770px;
+    height: 850px;
     padding: 30px;
     margin: auto auto;
     margin-top: 100px;
@@ -20,8 +20,8 @@
     
 }
 button{
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
 
     color:ghostwhite;
     background-color: rgb(64, 63, 63);
@@ -50,7 +50,7 @@ button{
 .keys-container{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 
     background-color: rgb(40, 39, 33);
 }
@@ -60,11 +60,10 @@ button{
     justify-content: space-between;
     align-items: center;
 
-    background-color: rgb(51, 48, 48);
+    background-color: #333030;
 
     height: 100px;
-    padding: 20px;
-    padding-left: 30px;   
+    padding: 20px;  
 }
 
 .action-div{
@@ -72,12 +71,12 @@ button{
     justify-content: space-between;
     justify-items: center;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
     
     background-color: rgb(51, 48, 48);
 }
 
-.onoff-key, .point-key, .clear-key, .equal-key{
+.onoff-key, .backspace-key, .clear-key, .equal-key{
     height: 100px;
     width: 120px;
 
@@ -85,16 +84,16 @@ button{
 }
 
 .equal-key{
-    width: 100px;
+    width: 112px;
 }
 
 .math-key{
     display: flex;
     justify-content: space-between;
 
-    padding: 20px;
+    padding:20px;
     
-    background-color: rgb(85, 50, 30);
+    background-color: rgb(51, 48, 48);
 }
 
 .number-keys-container{
@@ -108,9 +107,11 @@ button{
 .num-col{
     display: flex;
     gap: 10px;
+    align-self: flex-end;
 }
+
 .number-keys-container, .num-col{
-    background-color: rgb(85, 50, 30);
+    background-color: rgb(51, 48, 48);
 }
 
 .operator-keys-container{
@@ -122,6 +123,11 @@ button{
 
 }
 .add-key, .substract-key, .multiple-key, .divide-key{
-    width: 102px;
+    width: 112px;
     height: 102px;
+
+    background-color: rgba(158, 83, 2, 0.85); 
+}
+.add-key, .substract-key{
+    height: 140px;
 }
