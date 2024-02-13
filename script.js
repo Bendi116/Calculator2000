@@ -27,16 +27,18 @@ const backSpaceKey = document.querySelector(".backspace-key");
 
 //EventListeners
 numKeys.forEach((num)=>{
-    num.addEventListener("click",numStoreInMemory)
+    num.addEventListener("click",numEventManager)
 })
 opKeys.forEach((op)=>{
-    op.addEventListener("click",operatorStoreInMemory)
+    op.addEventListener("click",operatorEventManager)
 })
 equalKey.addEventListener("click", calculate)
 clearKey.addEventListener("click",clear)
 onOffKey.addEventListener("click",onOff)
 pointKey.addEventListener("click",addPoint)
 backSpaceKey.addEventListener("click",backSpace)
+document.addEventListener("keydown",keyBoardEventManager,true)
+
 
 //operate func
 function operate(firstOperand, secondOperand, operator){
@@ -95,39 +97,67 @@ function clear(){
 }
 //backspace
 function backSpace(){
-    if (on && !calculated)
-    displayText.innerText = displayText.innerText.slice(0, -1)
+    if (on && !calculated){
+        displayText.innerText = displayText.innerText.slice(0, -1)
+        if(displayText.innerText ===""){
+            displayText.innerText = "0"
+        }
+    }
+    
 }
 
 //memory srote function
 
-function numStoreInMemory(e){
+function numEventManager(e){
+    numStoreInMemory(e.target.innerText)
+}
+
+
+function numStoreInMemory(num){
     if(on){
         manageDisplay()
-        if(operator === ""){
-            firstOperand += e.target.innerText
-            displayNum(e.target.innerText);
+        if(!operator){
+            firstOperand += num
+            displayNum(num);
         }else{
-            secondOperand += e.target.innerText
-            displayNum(e.target.innerText)
+            secondOperand += num
+            displayNum(num)
         }
         calculated = false;
+        hasOp = false;
     }
     
     console.log(`firstOperand: ${firstOperand}`)
     console.log(`secondOperand: ${secondOperand}`)
 
 }
+function operatorEventManager(e){
+    operatorStoreInMemory(e.target.innerText)
 
-function operatorStoreInMemory(e){
-    if(on&& firstOperand !=="Error"){
-        if(operator){
-            calculate()
+}
+function operatorStoreInMemory(op){
+    if(on && firstOperand !=="Error"){
+        if(op ==="-" && !firstOperand ){
+            displayClear()
+            displayText.innerText = "-" + displayText.innerText
+            firstOperand = "-" + firstOperand
+
+        }else if(op ==="-" && operator){
+            displayClear()
+            displayText.innerText = "-" + displayText.innerText
+            secondOperand = "-" + secondOperand
         }
-        operator = e.target.innerText;
-        console.log(operator)
-        displayOperator(operator);
-        hasOp = true;
+        else if(!firstOperand){
+            displayOperator(op)
+        }else{
+            if(operator && secondOperand){
+                calculate()
+            }
+            operator = op;
+            displayOperator(operator);
+            hasOp = true;
+        }
+        
     }
    
 
@@ -161,14 +191,17 @@ function manageDisplay(){
      if(displayText.innerHTML ==="0"){
         displayClear();
     }
-    if(hasOp){
+    if(hasOp && secondOperand[0] != "-"){
         displayClear();
-        hasOp = false;
     }
     if(calculated && !operator){
         firstOperand = "";
         displayClear();
     }
+    if(displayText.innerText[0] == "+" || displayText.innerText[0] == "*" || displayText.innerText[0] == "/"){
+        displayClear()
+    }
+    
 }
 
 function displayClear(){
@@ -181,5 +214,72 @@ function displayOperator(text){
 
 function displayNum(text){
     displayText.innerText += text;
+}
+
+//keyboard event manager
+function keyBoardEventManager(e){
+    if(e.defaultPrevented){return}
+    
+    switch (e.key){
+        case '1':
+            numStoreInMemory('1');
+            break;
+        case "2":
+            numStoreInMemory("2");
+            break;
+        case '3':
+            numStoreInMemory('3');
+            break;
+        case "4":
+            numStoreInMemory("4");
+            break;
+        case '5':
+            numStoreInMemory('5');
+            break;
+        case "6":
+            numStoreInMemory("6");
+            break;
+            case '7':
+            numStoreInMemory('7');
+            break;
+        case "8":
+            numStoreInMemory("8");
+            break;
+        case "9":
+            numStoreInMemory("9");
+            break;
+        case "0":
+            numStoreInMemory("0");
+            break;
+        case "Backspace":
+            backSpace();
+            break;
+        case ".":
+            addPoint()
+            break;
+        case "+":
+            operatorStoreInMemory("+");
+            break;
+        case "-":
+            operatorStoreInMemory("-");
+            break;
+        case "*":
+            operatorStoreInMemory("*");
+            break;
+        case "/":
+            operatorStoreInMemory("/");
+            break;
+        case"Enter":
+            calculate();
+            break;
+        case"=":
+            calculate();
+            break;
+        default:
+            return;
+    }
+
+    e.preventDefault()
+
 }
 
